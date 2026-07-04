@@ -1,8 +1,6 @@
-// import '../styles/CartStyles/CheckoutPath.css';
-// import { AccountBalance, LibraryAddCheck, LocalShipping } from "@mui/icons-material"
+
 import '../styles/CartStyles/CheckoutPath.css';
 
-// ✅ Import MUI icons individually, keeping original names
 import AccountBalance from '@mui/icons-material/AccountBalance';
 import LibraryAddCheck from '@mui/icons-material/LibraryAddCheck';
 import LocalShipping from '@mui/icons-material/LocalShipping';
@@ -11,7 +9,7 @@ import LocalShipping from '@mui/icons-material/LocalShipping';
 const CheckOutPath=({activePath})=>{
     const path=[
         {
-            label:'Shipping Daetails',
+            label:'Shipping Details',
             icon:<LocalShipping />
         },
         {

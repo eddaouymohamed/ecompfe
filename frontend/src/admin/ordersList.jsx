@@ -1,15 +1,4 @@
-// import React, { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
-// import '../styles/AdminStyles/ordersList.css'
-// import { deleteOrder, fetchOrders, removeErrors, removeMessage, removeSucces } from '../features/admin/adminSlice';
-// import PageTitle from '../components/pageTitle';
-// import Footer from '../components/footer';
-// import NavBar from '../components/navBar';
-// import { toast } from 'react-toastify';
-// import Loader from '../components/loder';
-// import { Link, useNavigate } from 'react-router-dom';
-// import Button from '@mui/material/Button';
-// import { Delete, Edit } from '@mui/icons-material';
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import '../styles/AdminStyles/OrdersList.css';
@@ -22,7 +11,6 @@ import Loader from '../components/loder';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
-// ✅ Import MUI icons individually, keeping original names
 import Delete from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
 

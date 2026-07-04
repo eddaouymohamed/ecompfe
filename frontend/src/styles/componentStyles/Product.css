@@ -1,6 +1,17 @@
 .product_id {
   text-decoration: none;
   color: inherit;
+  display: block;
+  max-height: 348px;
+
+}
+.product-image-card {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  max-height: 166px;
 }
 
 .product-grid {
@@ -30,7 +41,16 @@
   margin-left: 0;
 }
 
-/*  */
+
+/* added  */
+ .product-card
+ {
+  max-height: 348px;
+}
+ .product-image-card
+ {
+  max-height: 166px;
+}
 .rating-container {
 display: flex;
   flex-direction: column;

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 60" width="100%" height="100%">
+  <defs>
+    <!-- Dégradé pour le côté "Fast" et l'éclair -->
+    <linearGradient id="fastGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF416C" />
+      <stop offset="100%" stop-color="#FF4B2B" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 5)">
+    <!-- Icône Éclair / Panier stylisé -->
+    <path d="M25 5 L10 30 L22 30 L15 55 L40 25 L28 25 Z" fill="url(#fastGrad)" />
+    
+    <!-- Texte "Shop" -->
+    <text x="55" y="40" font-family="Arial, sans-serif" font-weight="800" font-size="34" fill="#1A1A2E" letter-spacing="0.5">Shop</text>
+    
+    <!-- Texte "Fast" en italique pour la vitesse -->
+    <text x="142" y="40" font-family="Arial, sans-serif" font-weight="900" font-size="34" font-style="italic" fill="url(#fastGrad)">Fast</text>
+  </g>
+</svg>

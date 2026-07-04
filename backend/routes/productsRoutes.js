@@ -1,7 +1,6 @@
 import express from 'express'
 import { getAllProducts ,getSingleProduct,deleteProducts,createProducts,updateProducts, createProductReview, deleteProductReview, getAdminProducts, getProductReviews} from '../controller/productsController.js'
 import {verifyUserAuth,roleBasedAccess }from '../middleware/userAuth.js'
-// import { createProductReview, deleteProductReview, getAdminProducts, getProductReviews } from '../controller/productsController.js';
 const router=express.Router()
 router.route('/products').get(getAllProducts);
 router.route('/admin/products').get(verifyUserAuth,roleBasedAccess('admin'),getAdminProducts);

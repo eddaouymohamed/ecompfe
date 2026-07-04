@@ -23,9 +23,7 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true,
         minLength:[8,"password should contain at least 8 characters"],
-        select:false, // when spread data from a query select to be false prevent password to be
-        // selected and to be displayed so to include the password in query we must chainig .select('+password') after the query + here to tell mongodb overriding the default
-        // exclusion of a filed
+        select:false, 
 
     },
     avatar:{
@@ -77,3 +75,5 @@ userSchema.methods.generatePawordResetToken=function () {
     return resetToken;
 }
 export default mongoose.model('User',userSchema);
+
+

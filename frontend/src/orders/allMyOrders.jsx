@@ -1,14 +1,4 @@
-// import '../styles/OrderStyles/MyOrders.css';
-// import Footer from '../components/footer';
-// import PageTitle from '../components/pageTitle';
-// import NavBar from '../components/navBar';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useEffect } from 'react';
-// import { getAllMyOrders, removeErrors, removeSuccess } from '../features/order/orderSlice';
-// import Loader from '../components/loder';
-// import { Link } from 'react-router-dom';
-// import { LaunchOutlined } from '@mui/icons-material';
-// import {toast} from 'react-toastify';
+
 import '../styles/OrderStyles/MyOrders.css';
 import Footer from '../components/footer';
 import PageTitle from '../components/pageTitle';
@@ -20,7 +10,6 @@ import Loader from '../components/loder';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-// ✅ Import MUI icon individually, keeping original name
 import LaunchOutlined from '@mui/icons-material/LaunchOutlined';
 
 
@@ -35,6 +24,7 @@ export default function AllMyOrders() {
   useEffect(()=>{
 if(success){
   dispatch(removeSuccess())
+  // console.log('success')
 }
   },[dispatch,success])
   useEffect(() => {
@@ -43,6 +33,12 @@ if(success){
       dispatch(removeErrors())
     }
   }, [dispatch, error])
+  useEffect(() => {
+    if(orders){
+      console.log('orders', orders)
+    }
+  }, [orders])
+
   return (
     <>
       <PageTitle title={`${user.name}orders`} />
@@ -62,18 +58,22 @@ if(success){
               </thead>
               <tbody>
                 {orders && orders.map(order => (
+                  // {console.log(order)}
                   <tr key={order._id} >
                     <td>{order._id} </td>
+                    {console.log(order.orderItems)}
+                    {console.log(order.orderItems.quantity)}
                     <td>{order.orderItems.quantity} </td>
                     <td>{order.orderStatus}</td>
-                    <td>{order.totalPrice} </td>
+                    <td>{order.totalPrice.toFixed(2)} </td>
                     <td><Link className='order-link' to={`/order/${order._id}`}><LaunchOutlined /> </Link> </td>
 
                   </tr>
-                ))}
+                  // {console.log('order', order)}
+                ))} 
               </tbody>
 
-            </table>
+            </table>  
           </div>
 
         </>) : (<>

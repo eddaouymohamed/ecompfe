@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout, removeSuccess } from '../features/user/userSlice';
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
-// import items from 'razorpay/dist/types/items';
 export const UserDashboard=({user})=>{
     const [menuVisble,setMenuVisble]=useState(false);
     const {cartItems}=useSelector(state=>state.cart);

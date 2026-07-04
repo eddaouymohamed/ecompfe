@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import '../styles/componentStyles/Rating.css'
 
 const Rating = ({ value, onRatingChange, disabled }) => {
     const [hoveredRating, setHoveredRating] = useState(0);

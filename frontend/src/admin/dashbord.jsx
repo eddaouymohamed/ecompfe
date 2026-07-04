@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { fetchOrders, getAllAdminProducts, removeErrors, removeSucces } from '../features/admin/adminSlice';
 import { toast } from 'react-toastify';
 
-// ✅ Import MUI icons individually, keeping original names
 import  DashdrdIcon  from '@mui/icons-material/Dashboard';
 import Inventory from '@mui/icons-material/Inventory';
 import AddBox from '@mui/icons-material/AddBox';
@@ -132,10 +131,14 @@ const Dashboard = () => {
                                 <p>{totalReviews} </p>
 
                             </div>
-                            <div className="stat-box">
+                            <div className="stat-boxX">
                                 <AttachMoney className='icon' />
                                 <h3>Total Revenue</h3>
-                                <p>{totalAmount} </p>
+                                 <p> 7000.89 MAD</p>
+
+                                {/* <p>{totalAmount.toFixed(2)} MAD</p>
+                                <p>{Math.round(totalAmount * 100) / 100} MAD</p> */}
+
 
                             </div>
                             <div className="stat-box">

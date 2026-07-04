@@ -19,9 +19,7 @@ const ForgotPassword = () => {
             toast.error('please fill email field')
             return;
         }
-        // const myForm=new FormData();
-        // myForm.set('email',email);
-        // dispatch(forgotPassword(myForm));
+        
         dispatch(forgotPassword({email}));
 
     }

@@ -41,7 +41,6 @@ const ResetPassword = () => {
             navigate('/login')
         }
     }, [dispatch, success])
-    // / sent to email alors ona deux choses differentes
     return (
         <>
             <NavBar />

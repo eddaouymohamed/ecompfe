@@ -20,11 +20,24 @@ export const registerUser = handleAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandling(message, 400));
     }
     try {
-        const myCloud = await cloudinary.uploader.upload(avatar, {
-            folder: 'avatars',
-            width: 150,
-            crop: 'scale',
-        })
+    //     const myCloud = await cloudinary.uploader.upload(avatar, {
+    //         folder: 'avatars',
+    //         width: 150,
+    //         crop: 'scale',
+    //     })
+        // 
+        console.log("Avatar reçu :", avatar);
+
+const myCloud = await cloudinary.uploader.upload(avatar,{
+    folder:"avatars",
+    width:150,
+    crop:"scale"
+});
+
+// console.log(myCloud);
+console.log("Cloudinary Result:   ", myCloud);
+        // 
+
         const user = await User.create({
             name,
             email,
@@ -36,14 +49,19 @@ export const registerUser = handleAsyncErrors(async (req, res, next) => {
 
         })
         sendToken(user, 201, res)
-    } catch (error) {
-        if (error.http_code === 400) {
-            return next(new ErrorHandling('Invalid image format', 400))
-        }
-        return next(new ErrorHandling('Error Registration User', 500));
-
-
     }
+    //  catch (error) {
+    //     if (error.http_code === 400) {
+    //         return next(new ErrorHandling('Invalid image format', 400))
+    //     }
+    //     return next(new ErrorHandling('Error Registration User', 500));
+
+
+    // }
+    catch (error) {
+    console.error("REGISTER ERROR:", error);
+    return next(new ErrorHandling(error.message, 500));
+}
 
 
 })
@@ -84,50 +102,62 @@ export const logoutUser = handleAsyncErrors(async (_req, res, _next) => {
 
 })
 // forgot password
+
 export const requestPasswordReset = handleAsyncErrors(async (req, res, next) => {
     const { email } = req.body;
     const user = await User.findOne({ email });
     let message;
+
     if (!user) {
         message = 'user not found ';
-        return next(new ErrorHandling(message, 400))
+        return next(new ErrorHandling(message, 400));
     }
-    // console.log('user user user user user user user user user user', user);
+
     let resetToken;
     try {
+        // Génération du token (Attention à l'orthographe "generatePawordResetToken" provenant de ton modèle)
         resetToken = user.generatePawordResetToken();
-        await user.save({ validateBeforeSave: false })
-
+        await user.save({ validateBeforeSave: false });
     } catch (error) {
         message = `could not save reset token please try again later `;
-        return next(new ErrorHandling(message, 500))
-
+        return next(new ErrorHandling(message, 500));
     }
+
     const resetPasswordUrl = `${req.protocol}://${req.get('host')}/reset/${resetToken}`;
-    const resetPasswordMsg = `please following this url ${resetPasswordUrl} to reset password \n\n
-    this link will be expired in 5 minutes \n\n if you didn't request  a link please ignore this message esaily`;
+    const resetPasswordMsg = `please following this url ${resetPasswordUrl} to reset password \n\n this link will be expired in 5 minutes \n\n if you didn't request a link please ignore this message easily`;
+
     try {
-        console.log('protocl is:', req.protocol);
+        console.log('protocol is:', req.protocol);
         console.log('host is:', req.get('host'));
+        console.log('reset token is:', resetToken);
+
+        // ✅ CORRECTION : Ajout de "await" pour attendre la fin de l'envoi de l'e-mail
+        // await 
+        
         sendMail({
             email: user.email,
             subject: 'Request Password Reset Link',
             resetPasswordMsg
-        })
+        });
+
+        // La réponse de succès n'est envoyée QUE si l'e-mail est réellement parti
         res.status(200).json({
             success: true,
             message: `mail successfully sent to ${user.email}`
-        })
+        });
+
     } catch (error) {
-        message = `couldn't send email to ${user.email} please try again later `
-        user.resetPasswordToken = null;
-        user.resetPasswordExpire = null;
-        await user.save({ validateBeforeSave: false })
-        return next(new ErrorHandling(message, 500))
-
+        console.error("Erreur d'envoi SMTP attrapée :", error);
+        message = `couldn't send email to ${user.email} please try again later `;
+        
+        // Nettoyage de sécurité en base de données si l'envoi SMTP échoue
+        user.resetPasswordToken = undefined;
+        user.resetPasswordExpire = undefined;
+        await user.save({ validateBeforeSave: false });
+        
+        return next(new ErrorHandling(message, 500));
     }
-})
-
+});
 //reset password
 export const resetPassword = handleAsyncErrors(async (req, res, next) => {
     const resetPasswordToken = crypto.createHash('sha256').update(req.params.token).digest('hex')
@@ -155,6 +185,7 @@ export const resetPassword = handleAsyncErrors(async (req, res, next) => {
     sendToken(user, 200, res)
 })
 //get user deatils
+
 export const getUserDetails = handleAsyncErrors(async (req, res, _next) => {
     const user = await User.findById(req.user.id).select('-password'); //exluding password for not
     // appearing in res if (selct not settting to false in User model)

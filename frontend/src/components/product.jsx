@@ -21,7 +21,6 @@ const Product = ({ product }) => {
                 <div className="rating-container">
                     <Rating
                         value={product.ratings}
-                        // onRatingChange={(_,newValue)=>handleRatingChange(newValue)}
                         disabled={false}
                     />
                     <span className="productCardSpan">(

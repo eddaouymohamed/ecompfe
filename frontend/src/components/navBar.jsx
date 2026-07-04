@@ -1,17 +1,10 @@
-// import React, { useEffect } from 'react';
-// import '../styles/componentStyles/Navbar.css';
-// import '../styles/pageStyles/Search.css'
-// import { Link, useNavigate } from 'react-router-dom';
-// import { Search, ShoppingCart, PersonAdd, Close, Menu } from '@mui/icons-material';
-// import { useState } from 'react';
-// import { useSelector } from 'react-redux';
+
 import React, { useEffect, useState } from 'react';
 import '../styles/componentStyles/Navbar.css';
 import '../styles/pageStyles/Search.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-// ✅ Import MUI icons individually, keeping original names
 import Search from '@mui/icons-material/Search';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import PersonAdd from '@mui/icons-material/PersonAdd';
@@ -111,56 +104,3 @@ if(!isAuthenticated){
     )
 }
 export default NavBar;
-//   <div className="navbar-container">
-//                 <div className="navbar-logo">
-//                     <Link to="/">ShopFast</Link>
-
-//                 </div>
-//                 <div className={isMenuOpened ? 'navbar-links active':'navbar-links'}>
-//                     <ul>
-//                         <li onClick={toggleMenu}>
-//                             <Link to='/'>Home</Link>
-//                         </li>
-//                         <li onClick={toggleMenu}>
-//                             <Link to='/prodcuts'>Prodcuts</Link>
-//                         </li>
-//                         <li onClick={toggleMenu}>
-//                             <Link to='/about-us'>About Us</Link>
-//                         </li>
-//                         <li onClick={toggleMenu}>
-//                             <Link to='/contact-us'>Contact Us</Link>
-//                         </li>
-//                     </ul>
-//                 </div>
-//                 <div className="navbar-icons">
-//                     <div className="search-container">
-//                         <form className='search-form'>
-//                             <input
-//                                 type="text"
-//                                 name="search"
-//                                 id="search"
-//                                 className='search-input'
-//                                 placeholder='search prodcuts'
-//                             />
-//                             <button type="button" className='search-icon'>
-//                                 <Search focusable='false' className='icon' />
-//                             </button>
-//                         </form>
-//                     </div>
-//                     <div className="cart-container">
-
-//                         <ShoppingCart className='icon' />
-//                     </div>
-//                     <Link to='/register' className='register-link'>
-//                         <PersonAdd className='icon' />
-//                     </Link>
-//                     <div className="navbar-hamburger">
-//                         {isMenuOpened ? <Close className='icon' toggleMenu onClick={toggleMenu} /> :
-//                             <Menu className='icon' onClick={toggleMenu}  />}
-//                     </div>
-//                 </div>
-
-
-
-
-//             </div>

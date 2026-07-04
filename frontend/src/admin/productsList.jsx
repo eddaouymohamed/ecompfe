@@ -1,16 +1,4 @@
-// import React, { useEffect } from 'react'
-// import NavBar from '../components/navBar';
-// import Footer from '../components/footer';
-// import PageTitle from '../components/pageTitle';
-// import '../styles/AdminStyles/ProductsList.css'
-// import { Delete, Edit } from '@mui/icons-material';
-// import { Link } from 'react-router-dom';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { deleteProduct, getAllAdminProducts, removeErrors, removeMessage, removeSucces } from '../features/admin/adminSlice';
-// import { toast } from 'react-toastify';
-// import Loader from '../components/loder';
-// import Button from '@mui/material/Button';
-// import removeme<
+
 import React, { useEffect } from 'react';
 import NavBar from '../components/navBar';
 import Footer from '../components/footer';
@@ -23,7 +11,6 @@ import { toast } from 'react-toastify';
 import Loader from '../components/loder';
 import Button from '@mui/material/Button';
 
-// ✅ Import MUI icons individually, keeping original names
 import Delete from '@mui/icons-material/Delete';
 import Edit from '@mui/icons-material/Edit';
 
@@ -33,18 +20,15 @@ function ProductsList() {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getAllAdminProducts());
-        // console.log(products)
-        // dispatch(deleteProduct('68a2a5fa65c4862d8d645d05'))
+        console.log(products)
 
 
-    }, [dispatch])
-    // console.log(products)
+    }, [dispatch,products])
     useEffect(() => {
         if (success && message) {
             toast.success(message || 'product short succes delted', { position: 'top-center', autoClose: 3000 })
             dispatch(removeSucces());
             dispatch(removeMessage());
-            // dispatch(getAllAdminProducts())
 
         }
          if (success) {
@@ -65,7 +49,6 @@ function ProductsList() {
         if (isConfirmed) {
             dispatch(deleteProduct(id));
         }
-        // dispatch(getAllAdminProducts());
     }
     if (!products || products.length === 0) {
         return (

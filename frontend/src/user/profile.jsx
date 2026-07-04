@@ -35,7 +35,6 @@ export const Profile = () => {
         );
     }
 
-    // Handle case when user is not authenticated or user data is missing
     if (!isAuthenticated || !user) {
         return (
             <div className='profile-container'>

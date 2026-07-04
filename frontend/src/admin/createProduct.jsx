@@ -6,7 +6,6 @@ import Footer from '../components/footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProduct, removeErrors, removeSucces } from '../features/admin/adminSlice';
 import { toast } from 'react-toastify'
-// import Loader from '../components/loder';
 function CreateProduct() {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
@@ -29,22 +28,12 @@ function CreateProduct() {
             description,
             image, // this is already an array of base64 strings
         };
-        // const myForm = new FormData();
-        // myForm.set('name', name)
-        // myForm.set('price', Number(price))
-        // myForm.set('stock', Number(stock))
-        // myForm.set('category', category)
-        // myForm.set('description', description),
-        // image
-        // image.forEach(img => {
-        //     myForm.append('image', img);
-        // })
+      
 
         dispatch(createProduct(myForm));
     }
     const createProductImage = e => {
         const files = Array.from(e.target.files);
-        // console.log(files)
         setImage([]);
         setImagePreview([]);
         files.forEach(file => {
@@ -52,7 +41,6 @@ function CreateProduct() {
             reader.onload = () => {
                 if (reader.readyState === 2) {
                     setImagePreview(old => {
-                        // console.log(old)
                         return [...old, reader.result]
                     });
                     setImage(old => [...old, reader.result])
@@ -97,7 +85,6 @@ function CreateProduct() {
                     <input type="text" className='form-input' placeholder='enter product name' name='name' required value={name} onChange={(e) => setName(e.target.value)} />
                     <input type="text" className='form-input' placeholder='enter product price ' name='price' required value={price} onChange={(e) => setPrice(e.target.value)} />
                     <input type="text" className='form-input' placeholder='enter product description' name='description' required value={description} onChange={(e) => setDescription(e.target.value)} />
-                    {/* <input type="text" className='form-input'  placeholder='enter product name'/> */}
                     <select className='form-select' name='category' required value={category} onChange={e => setCategory(e.target.value)}>
                         <option value=""> Choose a Category</option>
                         {

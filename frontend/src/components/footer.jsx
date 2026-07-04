@@ -1,8 +1,6 @@
-// import { Mail, Phone, LinkedIn, GitHub, YouTube, Email } from '@mui/icons-material';
-// import '../styles/componentStyles/Footer.css';
+
 import '../styles/componentStyles/Footer.css';
 
-// ✅ Import MUI icons individually, keeping original names
 import Mail from '@mui/icons-material/Mail';
 import Phone from '@mui/icons-material/Phone';
 import LinkedIn from '@mui/icons-material/LinkedIn';
@@ -39,7 +37,7 @@ export default function Footer() {
                 </div>
                 <div className="footer-section about">
                     <h3>About</h3>
-                    <p>Providing web developement services,tutorials and courses which help you grow  your skills</p>
+                    <p>Découvrez ShopFast, votre destination en ligne pour des achats simples et rapides. Nous proposons une large gamme de produits sélectionnés avec soin afin de répondre à vos besoins tout en garantissant qualité, sécurité et satisfaction.</p>
                 </div>
             </div>
             <div className="footer-bottom">

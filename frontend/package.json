@@ -19,6 +19,7 @@
     "@stripe/stripe-js": "^7.4.0",
     "axios": "^1.10.0",
     "cloudinary": "^2.7.0",
+    "cors": "^2.8.6",
     "country-state-city": "^3.2.1",
     "express-fileupload": "^1.5.1",
     "razorpay": "^2.9.6",

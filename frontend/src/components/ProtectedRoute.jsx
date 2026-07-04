@@ -21,7 +21,6 @@ export const ProtectedRoute = ({ element, adminOnly = false }) => {
         );
     }
 
-    // Handle error state
     if (error) {
         return (
             <div className='profile-container'>
@@ -38,7 +37,6 @@ export const ProtectedRoute = ({ element, adminOnly = false }) => {
         );
     }
 
-    // Handle case when user is not authenticated or user data is missing
     if (!isAuthenticated || !user) {
         return (
             <div className='profile-container'>

@@ -1,3 +1,6 @@
+
+
+
 export default class APIFunctionality{
     constructor(query,queryObj){
         this.query=query;

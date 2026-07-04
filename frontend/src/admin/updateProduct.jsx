@@ -65,16 +65,7 @@ export default function UpdateProduct() {
 
         dispatch(updateProduct({id,myForm}));
     }
-    // const myForm = new FormData();
-    // myForm.set('name', name)
-    // myForm.set('price', Number(price))
-    // myForm.set('stock', Number(stock))
-    // myForm.set('category', category)
-    // myForm.set('description', description)
-    // // myForm.set('name',name)
-    // image.forEach(img => {
-    //     myForm.append('image', img);
-    // })
+   
     const createProductImage = e => {
         const files = Array.from(e.target.files);
         console.log(files)

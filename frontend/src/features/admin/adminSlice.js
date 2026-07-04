@@ -502,37 +502,23 @@ const adminSlice = createSlice({
             })
             // get product reviews
             .addCase(getProductReviews.pending, (state, action) => {
-                // const { id } = action.meta.arg
-                // state.deleting[id] = true
+            
                 state.error = null;
                 state.reviewsLoading = true;
 
             })
             .addCase(getProductReviews.fulfilled, (state, action) => {
-                // const { id, productId } = action.meta.arg
-                // state.deleting[id] = false
+                
                 state.error = null
                 state.reviewsLoading = false;
                 state.success = action.payload?.success || true;
-                // state.message = action.payload?.message;
                 state.reviews = action.payload?.reviews;
                 console.log(action.payload?.reviews);
-                // console.log(action.payload?.success)
-                // const index = state.products.findIndex(prod => prod._id === productId);
-                // if (index !== -1) {
-                //     const reviews = state.products[index];
-                //     const indexReview = reviews.findIndex(rev => rev._id === id);
-                //     if (indexReview !== -1) {
-                //         remainedReview = reviews.filter(rev => rev._id !== id);
-                //         state.products[index].reviews = remainedReview;
-                //     }
-                // }
+                /
 
 
             })
             .addCase(getProductReviews.rejected, (state, action) => {
-                // const { id } = action.meta.arg
-                // state.deleting[id] = false
                 state.reviewsLoading = false
                 state.error = action.payload?.message || 'an error occured while  product reviews';
             })

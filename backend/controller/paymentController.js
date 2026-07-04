@@ -1,64 +1,7 @@
 import { stripe } from "../server.js";
 import handleAsyncErrors from "../middleware/handleAsyncErrors.js";
 import { sendMail } from "../utils/sendMail.js";
-// export const processPayment=handleAsyncErrors(async(req ,res)=>{
-//     let {amount}=Number(req.body);
-//     amount*=100; // amount in cents 1 dollar === 100 cents
 
-//     const options={
-//         amount,
-//         currency:'usd',
-//         payment_method_types:['card']
-//     }
-//     const paymentIntent=await stripe.paymentIntents.create(options);
-//     res.status(200).json({
-//         success:true,
-//         clientSecret:paymentIntent.client_secret
-//     })
-// })
-// // send api piublished stripe key
-// export const sendAPIkEY=handleAsyncErrors(async(_req,res)=>{
-//     const key=process.env.STRIPE_PUBLISHED_KEY
-//     res.status(200).json({
-//         success:true,
-//         key
-
-//     })
-// })
-
-// sendstripe  api pub key
-// const sessioncreate=async()=>{
-//     console.log(await stripe.checkout.sessions.create({
-//          payment_method_types: ['card'],
-//         mode: 'payment',
-//         line_items: [
-//             {
-//                 price_data: {
-//                     currency: 'usd',
-//                     unit_amount: Math.round(amount * 100),
-//                     product_data: {
-//                         name: 'general product',
-//                         description: 'genral description || tahanks for purchase'
-
-
-//                     },
-
-//                 },
-//                 quantity:1
-//             }
-//         ],
-//         customer_email:user.email,
-// metadata:{
-//     buyer_name:user.name,
-//     phone:shippingInfo.phoneNumber
-// },
-// success_url:`${process.env.CLIENT_URL}/payment/success`,
-// cancel_url:`${process.env.CLIENT_URL}/payment/cancel`
-
-
-//     }))
-// }
-// sessioncreate();
 export const sendAPIKey = handleAsyncErrors(async (req, res) => {
     const stripePublishedKey = process.env.STRIPE_PUBLISHED_KEY
     res.status(200).json({
@@ -67,43 +10,71 @@ export const sendAPIKey = handleAsyncErrors(async (req, res) => {
     })
 })
 export const createCheckoutSesssion = handleAsyncErrors(async (req, res) => {
-    const { amount, shippingInfo, user } = req.body;
-    const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        mode: 'payment',
-        line_items: [
-            {
-                price_data: {
-                    currency: 'usd',
-                    unit_amount: Math.round(amount * 100),
-                    product_data: {
-                        name: 'general product',
-                        description: 'genral description || tahanks for purchase'
+    try {
+        console.log(" CREATE CHECKOUT SESSION HIT");
+        console.log("BODY =>", req.body);
+        console.log("CLIENT URL =>", process.env.CLIENT_URL);
 
+        const { amount, shippingInfo, user } = req.body;
 
+        if (!amount) {
+            throw new Error("Amount is missing");
+        }
+
+        if (!shippingInfo) {
+            throw new Error("Shipping info is missing");
+        }
+
+        if (!user) {
+            throw new Error("User is missing");
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            mode: 'payment',
+            line_items: [
+                {
+                    price_data: {
+                        currency: 'mad',
+                        unit_amount: Math.round(amount * 100),
+                        product_data: {
+                            name: 'general product',
+                            description: 'general description || thanks for purchase'
+                        }
                     },
+                    quantity: 1
+                }
+            ],
+            customer_email: user.email,
+            metadata: {
+                buyer_name: user.name,
+                phone: shippingInfo.phoneNumber
+            },
+            success_url: `${process.env.CLIENT_URLp}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${process.env.CLIENT_URLp}/payment/cancel`
+        });
 
-                },
-                quantity: 1
-            }
-        ],
-        customer_email: user.email,
-        metadata: {
-            buyer_name: user.name,
-            phone: shippingInfo.phoneNumber
-        },
-        success_url: `${process.env.CLIENT_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.CLIENT_URL}/payment/cancel`
+        // Fixed: Removed the stray "server" text that was written here
 
-    })
-    res.status(200).json({
-        success: true,
-        session,
-        id: session.id,
-        url: session.url,
+        console.log("✅ STRIPE SESSION CREATED =>", session.id);
 
-    })
-})
+        return res.status(200).json({
+            success: true,
+            id: session.id,
+            session,
+            url: session.url
+        });
+
+    } catch (error) {
+        console.log("❌ STRIPE ERROR =>", error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+            error
+        });
+    }
+});
 export const verfiyPayment = handleAsyncErrors(async (req, res) => {
     const { session_id } = req.body
     if (!session_id || typeof (session_id) !== 'string') {

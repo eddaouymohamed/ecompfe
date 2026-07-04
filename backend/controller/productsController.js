@@ -6,7 +6,7 @@ import { v2 as cloudinary } from 'cloudinary';
 
 export const createProducts = handleAsyncErrors(async (req, res, next) => {
 
-    const userId = req.user.id; // the user here is who authentificated
+    const userId = req.user.id; 
     req.body.user = userId
     if (!req.body.image) {
         return next(new ErrorHandling('Please provide product images', 400));
@@ -73,58 +73,7 @@ export const getAllProducts = handleAsyncErrors(async (req, res, next) => {
     })
 
 })
-// 3 UPDATE PRODUCTS
 
-// export const updateProducts = handleAsyncErrors(async (req, res, next) => {
-
-//     let product = await Product.findById(req.params.id);
-//     if (!product) {
-//         return next(new ErrorHandling('Product not found ', 500))
-//     }
-//     if (req.body.image) {
-//         let image = product.image;
-//         for (let index = 0; index < image.length; index++) {
-//             await cloudinary.uploader.destroy(image[index].public_id)
-
-
-//         }
-
-//         image = [];
-//         if (typeof req.body.image === 'string') {
-//             image.push(req.body.image)
-//         }
-//         else {
-//             image = req.body.image
-//         }
-//         let imageLinks = []
-//         for (let index = 0; index < image.length; index++) {
-//             const result = await cloudinary.uploader.upload(image[index], {
-//                 folder: 'products'
-//             })
-//             imageLinks.push({
-//                 public_id: result.public_id,
-//                 url: result.secure_url
-//             })
-//         }
-//         req.body.image = imageLinks;
-
-//         // }
-//         product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-//             new: true,
-//             runValidators: true,
-//             // useFindAndModify: false
-//         })
-
-//         res.status(200).json({
-//             success: true,
-//             product
-//         })
-//     }
-//     // destroy images
-
-
-// })
-///////////////
 export const updateProducts = handleAsyncErrors(async (req, res, next) => {
 
     let product = await Product.findById(req.params.id);
@@ -222,11 +171,6 @@ export const getAdminProducts = handleAsyncErrors(async (_req, res, _next) => {
 export const createProductReview = handleAsyncErrors(async (req, res, next) => {
     const { productId, rating, comment } = req.body;
     const review = {
-
-
-
-
-
         user: req.user._id,
         name: req.user.name,
         rating: Number(rating),

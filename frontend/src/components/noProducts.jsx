@@ -1,10 +1,7 @@
-// import { Link } from 'react-router-dom';
-// import '../styles/componentStyles/NoProducts.css'
-// import { ReportProblem, } from '@mui/icons-material';
+
 import { Link } from 'react-router-dom';
 import '../styles/componentStyles/NoProducts.css';
 
-// ✅ Import MUI icon individually, keeping original name
 import ReportProblem from '@mui/icons-material/ReportProblem';
 
 const NoProducts = ({ keyword }) => {

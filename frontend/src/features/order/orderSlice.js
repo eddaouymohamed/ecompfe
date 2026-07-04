@@ -27,6 +27,8 @@ export const getAllMyOrders = createAsyncThunk('order/getAllMyOrders', async ( _
     try {
 
         const { data } = await axios.get('/api/v1/orders/user');
+        console.log("orders");
+        
         console.log(data);
         return data
     } catch (error) {

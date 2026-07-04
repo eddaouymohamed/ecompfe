@@ -6,3 +6,4 @@ router.route('/create-checkout-session').post(verifyUserAuth, createCheckoutSess
 router.route('/getkey').get(verifyUserAuth, sendAPIKey)
 router.route('/payment/verification').post(verfiyPayment);
 export default router
+// router.post("/create-checkout-session", verifyUserAuth, ...)ordpay
