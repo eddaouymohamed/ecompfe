@@ -40,7 +40,7 @@ app.use('/api/v1', payment)
    CORS
 ========================= */
 app.use(cors({
-  origin: "http://localhost:5173", // ton frontend (DEV)
+  origin: true,
   credentials: true
 }));
 
@@ -49,11 +49,11 @@ app.use(cors({
    👉 IMPORTANT: à activer seulement si backend + frontend ensemble
 ========================= */
 
-// app.use(express.static(path.join(__dirname,'../frontend/dist')));
+app.use(express.static(path.join(__dirname,'../frontend/dist')));
 
-// app.get(/^\/(?!api\/).*/, (req, res) => {
-//   res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
-// });
+app.get(/^\/(?!api\/).*/, (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
+});
 
 /* =========================
    ERROR HANDLER
