@@ -514,7 +514,7 @@ const adminSlice = createSlice({
                 state.success = action.payload?.success || true;
                 state.reviews = action.payload?.reviews;
                 console.log(action.payload?.reviews);
-                /
+                
 
 
             })
